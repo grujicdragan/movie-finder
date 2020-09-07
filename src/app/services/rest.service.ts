@@ -13,12 +13,12 @@ export class RestService {
   getMovies(ttl: string, year: string, page: number) {
     return this.http
       .get<Movie>(
-        'http://www.omdbapi.com/' + '?s=' + ttl + '&apikey=71771be9' + '&y=' + year + '&page=' + page
+        'https://www.omdbapi.com/' + '?s=' + ttl + '&apikey=71771be9' + '&y=' + year + '&page=' + page
       )
       .pipe(toArray<Movie>());
   }
 
   getMovie(id: string) {
-    return this.http.get('http://www.omdbapi.com/' + '?i=' + id + '&apikey=71771be9').pipe(toArray<MovieDetails>());;
+    return this.http.get('https://www.omdbapi.com/' + '?i=' + id + '&apikey=71771be9').pipe(toArray<MovieDetails>());;
   }
 }
