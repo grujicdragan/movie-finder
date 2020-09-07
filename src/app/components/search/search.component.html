@@ -1,0 +1,56 @@
+<div class="search-wrapper" id="search">
+    <div class="search">
+        <h2>Search movie by: </h2>
+        <form>
+            <mat-form-field appearance="outline" hideRequiredMarker>
+                <mat-label>Title</mat-label>
+                <input matInput required placeholder="Minimum 3 characters.." [formControl]="title" minlength="3">
+                <mat-error *ngIf="title.invalid">{{getErrorMessageTitle()}}</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" hideRequiredMarker>
+                <mat-label>Year</mat-label>
+                <input matInput placeholder="1960-" type="number" [formControl]="year">
+            </mat-form-field>
+            <button mat-raised-button [disabled]="title.invalid" class="btn" (click)="getMovieByTitle()">
+                SEARCH
+            </button>
+        </form>
+    </div>
+    <div *ngFor="let item of fullArray" class="tbl">
+        <div *ngFor="let subItem of item" class="tbl">
+            <h1>{{ subItem.Title }}</h1>
+            <a href="https://www.imdb.com/title/{{subItem.imdbID}}" target="__blank"><img class="poster" src="{{subItem.Poster}}" alt="No Poster Picture"></a>
+            <table id="movies">
+                <tr>
+                    <th>Year</th>
+                    <td>{{ subItem.Year }}</td>
+                </tr>
+                <tr>
+                    <th>Genre</th>
+                    <td>{{ subItem.Genre }}</td>
+                </tr>
+                <tr>
+                    <th>Actors</th>
+                    <td>{{ subItem.Actors }}</td>
+                </tr>
+                <tr>
+                    <th>Plot</th>
+                    <td style="font-size: 12px;">{{ subItem.Plot }}</td>
+                </tr>
+                <tr>
+                    <th>Director</th>
+                    <td>{{ subItem.Director }}</td>
+                </tr>
+                <tr>
+                    <th>imdb Rating</th>
+                    <td>{{ subItem.imdbRating }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <p class="errmsg">{{errMsg}}</p>
+    <div class="buttons" id="buttons">
+        <button (click)="prev()" class="btn" id="prev" [disabled]="this.page <= 1"><i class="fas fa-angle-double-left"></i></button>
+        <button (click)="next()" class="btn" id="next" [disabled]="this.page === this.totalPages || this.totalPages === 0"><i class="fas fa-angle-double-right"></i></button>
+    </div>
+</div>
