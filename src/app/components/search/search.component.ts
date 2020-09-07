@@ -51,6 +51,9 @@ export class SearchComponent implements OnInit {
             document.getElementById('buttons').style.display = 'none';
           }
           this.totalPages = Math.round(Number(totalP.totalResults) / 10);
+          if (this.totalPages < 1) {
+            this.totalPages = 1;
+          }
           for (let j in movie) {
             let id = movie[j];
             this.service.getMovie(id.imdbID).subscribe((data) => {
